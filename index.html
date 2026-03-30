@@ -42,8 +42,8 @@ img{max-width:100%;height:auto;loading:lazy}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,92,42,.4)}55%{box-shadow:0 0 0 10px rgba(200,92,42,0)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;will-change:opacity,transform}
-.reveal.visible{opacity:1;transform:translateY(0);will-change:auto}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
 /* TICKER BAR */
 .ticker-bar{
@@ -60,7 +60,6 @@ img{max-width:100%;height:auto;loading:lazy}
   align-items:center;
   white-space:nowrap;
   animation:ticker 28s linear infinite;
-  will-change:transform;
 }
 .ticker-track:hover{ animation-play-state:paused; }
 @keyframes ticker{
@@ -131,25 +130,38 @@ nav{
 
 /* HERO */
 @keyframes orbFloat{
-  0%,100%{transform:translate(-50%,-58%) scale(1)}
-  50%{transform:translate(-50%,-62%) scale(1.08)}
+  0%,100%{transform:translate(-50%,-58%)}
+  50%{transform:translate(-50%,-63%)}
 }
 @keyframes orbFloat2{
-  0%,100%{transform:translate(0,0) scale(1)}
-  50%{transform:translate(-20px,20px) scale(1.1)}
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(-18px,18px)}
 }
 @keyframes orbFloat3{
-  0%,100%{transform:translate(0,0) scale(1)}
-  50%{transform:translate(16px,-16px) scale(1.06)}
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(14px,-14px)}
 }
-@keyframes noiseShift{
-  0%{background-position:0 0}
-  100%{background-position:200px 200px}
+@keyframes heroLineGrow{
+  from{transform:scaleX(0);opacity:0}
+  to{transform:scaleX(1);opacity:1}
+}
+@keyframes statCountUp{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes ringPulse{
+  0%,100%{opacity:.12}
+  50%{opacity:.05}
+}
+@keyframes ringPulse2{
+  0%,100%{opacity:.07}
+  50%{opacity:.025}
 }
 
 #hero{
   position:relative;display:flex;align-items:center;justify-content:center;
   overflow:hidden;min-height:100svh;
+  isolation:isolate;
   background: radial-gradient(ellipse 140% 90% at 55% 35%,
     rgba(45,30,18,1) 0%,
     rgba(22,17,12,1) 45%,
@@ -168,122 +180,293 @@ nav{
 .hero-overlay{
   position:absolute;inset:0;z-index:1;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 20%, rgba(200,92,42,.13) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 15% 70%, rgba(200,92,42,.06) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 85% 65%, rgba(200,92,42,.05) 0%, transparent 55%),
-    radial-gradient(ellipse 100% 50% at 50% 105%, rgba(8,6,4,.95) 0%, transparent 65%);
+    radial-gradient(ellipse 80% 65% at 72% 42%, rgba(200,92,42,.11) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 10% 65%, rgba(200,92,42,.07) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 88% 20%, rgba(200,92,42,.05) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 50% at 50% 108%, rgba(8,6,4,.98) 0%, transparent 65%);
 }
 
 /* Grid perspectiva sutil */
 .hero-grid{
   position:absolute;inset:0;z-index:1;
   background-image:
-    linear-gradient(rgba(200,92,42,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(200,92,42,.04) 1px,transparent 1px);
-  background-size:72px 72px;
-  mask-image:radial-gradient(ellipse 70% 65% at 50% 42%, black 0%, transparent 78%);
-  -webkit-mask-image:radial-gradient(ellipse 70% 65% at 50% 42%, black 0%, transparent 78%);
+    linear-gradient(rgba(200,92,42,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,92,42,.035) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 85% 70% at 68% 48%, black 0%, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 85% 70% at 68% 48%, black 0%, transparent 75%);
 }
 
-/* Orb principal — centro */
+/* Orb principal — lado derecho */
 .hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none}
 .hero-glow::before{
   content:'';position:absolute;
-  width:680px;height:680px;
-  background:radial-gradient(circle, rgba(200,92,42,.16) 0%, rgba(200,92,42,.06) 35%, transparent 68%);
-  top:50%;left:50%;
+  width:800px;height:800px;
+  background:radial-gradient(circle, rgba(200,92,42,.14) 0%, rgba(200,92,42,.05) 38%, transparent 66%);
+  top:50%;left:68%;
   transform:translate(-50%,-58%);
-  border-radius:50%;filter:blur(8px);
-  animation:orbFloat 7s ease-in-out infinite;
+  border-radius:50%;filter:blur(40px);
+  will-change:transform;
+  animation:orbFloat 8s ease-in-out infinite;
 }
-/* Orb secundario — izquierda */
+/* Orb secundario — izquierda bajo */
 .hero-glow::after{
   content:'';position:absolute;
-  width:360px;height:360px;
-  background:radial-gradient(circle, rgba(200,92,42,.09) 0%, transparent 65%);
-  top:30%;left:5%;
-  border-radius:50%;filter:blur(20px);
-  animation:orbFloat2 9s ease-in-out infinite;
+  width:400px;height:400px;
+  background:radial-gradient(circle, rgba(200,92,42,.07) 0%, transparent 65%);
+  top:62%;left:8%;
+  border-radius:50%;filter:blur(40px);
+  will-change:transform;
+  animation:orbFloat2 11s ease-in-out infinite;
 }
-/* Orb terciario — derecha */
+/* Orb terciario — derecha alta */
 .hero-orb3{
   position:absolute;z-index:1;pointer-events:none;
-  width:280px;height:280px;
-  background:radial-gradient(circle, rgba(200,92,42,.08) 0%, transparent 65%);
-  top:25%;right:4%;
-  border-radius:50%;filter:blur(16px);
-  animation:orbFloat3 11s ease-in-out infinite;
+  width:320px;height:320px;
+  background:radial-gradient(circle, rgba(200,92,42,.09) 0%, transparent 65%);
+  top:12%;right:8%;
+  border-radius:50%;filter:blur(36px);
+  will-change:transform;
+  animation:orbFloat3 13s ease-in-out infinite;
 }
 
-/* Línea decorativa horizontal */
-.hero-line{
+/* ── HERO VISUAL: PANEL DASHBOARD PREMIUM ─────────────────── */
+
+/* Contenedor principal del panel */
+.hero-dashboard{
+  position:relative;
+  width:100%;max-width:380px;
+  display:flex;flex-direction:column;gap:10px;
+  animation:fadeUp .9s .4s both;
+}
+
+/* Panel superior: métrica principal */
+@keyframes dashFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+.dash-main{
+  background:rgba(12,10,8,.88);
+  border:1px solid rgba(200,92,42,.22);
+  border-radius:20px;
+  padding:22px 24px 20px;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 20px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06);
+  will-change:transform;
+  animation:dashFloat 6s ease-in-out infinite;
+  position:relative;overflow:hidden;
+}
+/* Línea acento superior */
+.dash-main::before{
+  content:'';position:absolute;top:0;left:24px;right:24px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(200,92,42,.55),transparent);
+}
+
+.dash-main-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;
+}
+.dash-main-label{
+  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+}
+.dash-main-badge{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);
+  border-radius:100px;padding:3px 9px;
+}
+.dash-badge-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;animation:blink 2s infinite}
+.dash-badge-txt{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4ade80}
+
+/* Valor grande */
+.dash-main-val{
+  font-family:var(--font-heading);font-size:48px;font-weight:800;
+  color:#FAF7F4;line-height:1;letter-spacing:-.04em;
+  margin-bottom:4px;
+}
+.dash-main-val span{color:var(--orange)}
+.dash-main-sub{
+  font-size:12px;color:rgba(255,255,255,.32);line-height:1.4;
+}
+
+/* Barra de progreso */
+.dash-bar-wrap{
+  margin-top:18px;
+  background:rgba(255,255,255,.06);
+  border-radius:100px;height:4px;overflow:hidden;
+}
+.dash-bar-fill{
+  height:100%;border-radius:100px;
+  background:linear-gradient(90deg, var(--orange), #e8834a);
+  width:78%;
+  position:relative;
+}
+.dash-bar-fill::after{
+  content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:8px;height:8px;border-radius:50%;
+  background:#FAF7F4;box-shadow:0 0 6px rgba(200,92,42,.8);
+}
+
+/* Fila inferior: 3 mini métricas */
+.dash-metrics{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+}
+
+.dash-metric{
+  background:rgba(12,10,8,.82);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;
+  padding:14px 14px 12px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 8px 24px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.04);
+  display:flex;flex-direction:column;gap:8px;
+  will-change:transform;
+  transition:border-color .4s ease;
+}
+.dash-metric:nth-child(1){animation:dashFloat 5.5s 0.2s ease-in-out infinite}
+.dash-metric:nth-child(2){animation:dashFloat 6.2s 0.9s ease-in-out infinite}
+.dash-metric:nth-child(3){animation:dashFloat 5.8s 1.5s ease-in-out infinite}
+
+.dash-metric:hover{border-color:rgba(200,92,42,.28)}
+
+.dm-icon{
+  width:28px;height:28px;border-radius:8px;
+  background:rgba(200,92,42,.1);border:1px solid rgba(200,92,42,.18);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.dm-num{
+  font-family:var(--font-heading);font-size:16px;font-weight:800;
+  color:#FAF7F4;line-height:1;letter-spacing:-.02em;
+}
+.dm-label{
+  font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);line-height:1.3;
+}
+
+/* Fila de testimonial inline */
+.dash-testimony{
+  background:rgba(12,10,8,.75);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:13px 16px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
+  will-change:transform;
+  animation:dashFloat 7s 0.6s ease-in-out infinite;
+}
+.dt-avatar{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,rgba(200,92,42,.4),rgba(200,92,42,.15));
+  border:1.5px solid rgba(200,92,42,.35);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-heading);font-size:13px;font-weight:800;color:var(--orange-light);
+}
+.dt-body{flex:1;min-width:0}
+.dt-text{font-size:11px;color:rgba(255,255,255,.55);line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dt-meta{display:flex;align-items:center;gap:6px;margin-top:4px}
+.dt-name{font-size:10px;font-weight:700;color:rgba(255,255,255,.38)}
+.dt-stars{color:var(--orange);font-size:9px;letter-spacing:1px}
+
+/* Eliminar estilos de los anillos y tarjetas antiguas */
+.hero-rings,.hero-ring,.hero-ring-cross,.hero-ring-dot,
+.hero-stat-card,.stat-icon,.stat-text,.stat-num,.stat-label{display:none!important}
+
+/* Dots indicadores del testimonial rotativo */
+.dt-dots{display:flex;flex-direction:column;gap:4px;flex-shrink:0;align-self:center}
+.dt-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.15);transition:background .4s,transform .4s}
+.dt-dot.dt-dot-active{background:var(--orange);transform:scale(1.35)}
+@keyframes dtFadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.dt-fade{animation:dtFadeIn .45s ease both}
+@keyframes dmFadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.dm-fade{animation:dmFadeIn .4s ease both}
+
+/* Línea decorativa vertical izquierda */
+.hero-vline{
   position:absolute;z-index:1;pointer-events:none;
-  left:0;right:0;
-  top:calc(50% - 1px);
-  height:1px;
-  background:linear-gradient(90deg,
+  left:0;top:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,
     transparent 0%,
-    rgba(200,92,42,.12) 20%,
-    rgba(200,92,42,.22) 50%,
-    rgba(200,92,42,.12) 80%,
+    rgba(200,92,42,.0) 15%,
+    rgba(200,92,42,.18) 40%,
+    rgba(200,92,42,.25) 55%,
+    rgba(200,92,42,.08) 80%,
     transparent 100%);
-  mask-image:radial-gradient(ellipse 70% 100% at 50% 50%, black 0%, transparent 100%);
-  -webkit-mask-image:radial-gradient(ellipse 70% 100% at 50% 50%, black 0%, transparent 100%);
+  display:none;
 }
 
+.hero-line{display:none}
+
+/* LAYOUT SPLIT */
 .hero-inner{
-  position:relative;z-index:2;width:100%;max-width:1000px;margin:0 auto;
-  display:flex;flex-direction:column;align-items:center;text-align:center;
-  padding:168px 40px 128px;
+  position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:0;
+  padding:160px 64px 120px;
+  min-height:100svh;
 }
-@media(max-width:600px){.hero-inner{padding:128px 24px 88px;}}
-.hero-content{animation:fadeUp .9s .1s both;display:flex;flex-direction:column;align-items:center;width:100%}
+.hero-content{
+  animation:fadeUp .9s .1s both;
+  display:flex;flex-direction:column;
+  align-items:flex-start;
+  text-align:left;
+  width:100%;
+  max-width:560px;
+}
+.hero-visual-col{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  height:100%;
+  min-height:420px;
+}
 
 /* HERO BADGE */
 .hero-badge{
   display:inline-flex;align-items:center;gap:9px;
   background:rgba(200,92,42,.08);
   border:1px solid rgba(200,92,42,.28);
-  border-radius:100px;padding:7px 18px;margin-bottom:36px;
+  border-radius:100px;padding:7px 18px;margin-bottom:44px;
   box-shadow:0 0 20px rgba(200,92,42,.08), inset 0 1px 0 rgba(255,255,255,.05);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  align-self:center;margin-left:auto;margin-right:auto;
+  align-self:flex-start;
 }
 .badge-dot{width:6px;height:6px;background:var(--orange);border-radius:50%;animation:blink 2s infinite;flex-shrink:0;box-shadow:0 0 6px rgba(200,92,42,.8)}
 .hero-badge span{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-light)}
 
-/* Separador decorativo sobre el H1 */
+/* Separador decorativo */
 .hero-divider{
   display:flex;align-items:center;gap:12px;
-  margin-bottom:20px;width:100%;max-width:400px;justify-content:center;
+  margin-bottom:20px;width:100%;max-width:400px;
 }
 .hero-divider-line{
-  flex:1;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(200,92,42,.3),transparent);
+  width:32px;height:1px;flex-shrink:0;
+  background:linear-gradient(90deg,rgba(200,92,42,.5),transparent);
+  transform-origin:left;animation:heroLineGrow .5s .3s both;
 }
 .hero-divider-icon{
-  color:rgba(200,92,42,.5);font-size:8px;letter-spacing:.2em;
+  color:rgba(200,92,42,.45);font-size:8px;letter-spacing:.2em;
   font-family:var(--font-body);font-weight:700;text-transform:uppercase;
 }
 
 .hero-h1{
   font-family:var(--font-heading);
-  font-size:clamp(40px,7.2vw,82px);
+  font-size:clamp(44px,5.8vw,88px);
   font-weight:800;
-  line-height:.95;letter-spacing:-.03em;
+  line-height:.92;letter-spacing:-.035em;
   text-transform:uppercase;
   color:var(--color-h1);
-  margin-bottom:8px;
+  margin-bottom:0;
   text-shadow:0 2px 40px rgba(0,0,0,.4);
 }
 @keyframes pulseGlow{
   0%,100%{
-    text-shadow:0 0 30px rgba(200,92,42,.35),0 0 60px rgba(200,92,42,.15),0 2px 40px rgba(0,0,0,.4);
-    filter:brightness(1);
+    text-shadow:0 0 30px rgba(200,92,42,.3),0 0 60px rgba(200,92,42,.12),0 2px 40px rgba(0,0,0,.4);
   }
   50%{
-    text-shadow:0 0 60px rgba(200,92,42,.75),0 0 120px rgba(200,92,42,.4),0 0 200px rgba(200,92,42,.15);
-    filter:brightness(1.05);
+    text-shadow:0 0 55px rgba(200,92,42,.65),0 0 110px rgba(200,92,42,.3),0 0 180px rgba(200,92,42,.1);
   }
 }
 .hero-h1 .accent{
@@ -294,40 +477,80 @@ nav{
 }
 .hero-h1 .line2{
   display:block;
-  color:rgba(250,247,244,.75);
+  color:rgba(250,247,244,.72);
   font-size:.82em;
   letter-spacing:-.01em;
 }
 
+/* Línea naranja bajo h1 */
+.hero-h1-underline{
+  width:64px;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,var(--orange),rgba(200,92,42,.2));
+  margin:20px 0 0;
+  animation:heroLineGrow .6s .5s both;
+  transform-origin:left;
+}
+
 .hero-tagline{
   font-family:var(--font-body);
-  font-size:clamp(10px,1.8vw,12px);
+  font-size:clamp(10px,1.4vw,11px);
   font-weight:700;
-  letter-spacing:.18em;
+  letter-spacing:.2em;
   text-transform:uppercase;
-  color:rgba(255,255,255,.4);
-  margin-top:20px;
-  margin-bottom:22px;
-  padding:0 8px;
+  color:rgba(255,255,255,.38);
+  margin-top:28px;
+  margin-bottom:40px;
+  padding:0;
   display:flex;align-items:center;gap:10px;
 }
-.hero-tagline::before,.hero-tagline::after{
-  content:'';display:inline-block;width:28px;height:1px;
-  background:rgba(200,92,42,.4);flex-shrink:0;
+.hero-tagline::before{
+  content:'';display:inline-block;width:20px;height:1px;
+  background:rgba(200,92,42,.45);flex-shrink:0;
 }
-.hero-tagline .hoy{color:var(--orange);letter-spacing:.2em;}
+.hero-tagline::after{display:none}
+.hero-tagline .hoy{color:var(--orange);letter-spacing:.22em;}
 
 .hero-sub{
-  font-size:clamp(14px,1.6vw,16px);
-  line-height:1.85;color:rgba(204,204,204,.65);
+  font-size:clamp(14px,1.5vw,16px);
+  line-height:1.85;color:rgba(204,204,204,.62);
   margin-bottom:48px;
-  max-width:520px;
+  max-width:480px;
   font-weight:400;
 }
 .hero-ctas{
-  display:flex;gap:12px;flex-wrap:wrap;
-  margin-bottom:48px;align-items:center;
-  justify-content:center;
+  display:flex;gap:14px;flex-wrap:wrap;
+  margin-bottom:0;align-items:center;
+  justify-content:flex-start;
+}
+
+/* RESPONSIVE HERO */
+@media(max-width:900px){
+  .hero-inner{
+    grid-template-columns:1fr;
+    padding:148px 32px 80px;
+    gap:0;
+    align-items:flex-start;
+  }
+  .hero-content{
+    align-items:center;
+    text-align:center;
+    max-width:100%;
+  }
+  .hero-badge{align-self:center}
+  .hero-divider{justify-content:center}
+  .hero-h1-underline{margin-left:auto;margin-right:auto}
+  .hero-tagline{justify-content:center}
+  .hero-tagline::before{display:none}
+  .hero-tagline::after{content:'';display:inline-block;width:20px;height:1px;background:rgba(200,92,42,.45);flex-shrink:0}
+  .hero-ctas{justify-content:center}
+  .hero-visual-col{display:none}
+  .hero-trust{max-width:100%}
+}
+@media(max-width:600px){
+  .hero-inner{padding:128px 20px 72px;}
+  .hero-h1{font-size:clamp(38px,11vw,56px);}
+  .hero-ctas{flex-direction:column;align-items:stretch;gap:10px}
+  .btn-primary,.btn-secondary{justify-content:center}
 }
 .btn-primary{
   display:inline-flex;align-items:center;gap:8px;
@@ -372,7 +595,6 @@ nav{
   display:flex;align-items:center;
   white-space:nowrap;
   animation:trust-scroll 18s linear infinite;
-  will-change:transform;
 }
 @keyframes trust-scroll{
   0%{transform:translateX(0)}
@@ -916,37 +1138,89 @@ footer strong{color:var(--orange)}
   <div class="hero-orb3"></div>
   <div class="hero-line"></div>
   <div class="hero-inner">
+
+    <!-- COLUMNA IZQUIERDA: Texto -->
     <div class="hero-content">
       <div class="hero-badge"><span class="badge-dot"></span><span>Mantenimiento Técnico · Santa Cruz, Bolivia</span></div>
       <h1 class="hero-h1">Tu equipo<span class="accent">frenando</span><span class="line2">tu negocio.</span></h1>
+      <div class="hero-h1-underline"></div>
       <p class="hero-tagline">Nosotros lo resolvemos. <span class="hoy">Hoy.</span> En tu oficina.</p>
-      <p class="hero-sub">Cada minuto que tu computadora tarda es un minuto de producción perdido. A TUM Ti llega a tu espacio, diagnóstica, optimiza y te devuelve un equipo que rinde — sin que pierdas el día.</p>
+
       <div class="hero-ctas">
         <a href="#servicios" class="btn-primary">Quiero mi equipo hoy <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <a href="#roi-calc" class="btn-secondary">¿Cuánto pierdes cada semana? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></a>
       </div>
-      <div class="hero-trust">
-        <div class="trust-track">
-          <span class="trust-item"><span class="trust-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>Resultados el mismo día</span>
-          <span class="trust-sep">✦</span>
-          <span class="trust-item"><span class="trust-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></span>Vamos a tu oficina</span>
-          <span class="trust-sep">✦</span>
-          <span class="trust-item"><span class="trust-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>Precio fijo sin sorpresas</span>
-          <span class="trust-sep">✦</span>
-          <span class="trust-item"><span class="trust-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Sin contrato</span>
-          <span class="trust-sep">✦</span>
-          <!-- Duplicado para loop infinito -->
-          <span class="trust-item"><span class="trust-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>Resultados el mismo día</span>
-          <span class="trust-sep">✦</span>
-          <span class="trust-item"><span class="trust-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></span>Vamos a tu oficina</span>
-          <span class="trust-sep">✦</span>
-          <span class="trust-item"><span class="trust-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>Precio fijo sin sorpresas</span>
-          <span class="trust-sep">✦</span>
-          <span class="trust-item"><span class="trust-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Sin contrato</span>
-          <span class="trust-sep">✦</span>
+
+    </div>
+
+    <!-- COLUMNA DERECHA: Visual decorativo -->
+    <div class="hero-visual-col">
+      <div class="hero-dashboard">
+
+        <!-- Panel principal: tasa de recuperación — cambia con cada testimonial -->
+        <div class="dash-main" id="dash-main-panel">
+          <div class="dash-main-header">
+            <span class="dash-main-label" id="dm-label-top">Rendimiento recuperado</span>
+            <div class="dash-main-badge">
+              <span class="dash-badge-dot"></span>
+              <span class="dash-badge-txt">En vivo</span>
+            </div>
+          </div>
+          <div class="dash-main-val"><span id="dm-pct-val">+78</span>%</div>
+          <div class="dash-main-sub" id="dm-sub-text">Velocidad recuperada · Tune-Up Completo</div>
+          <div class="dash-bar-wrap">
+            <div class="dash-bar-fill" id="dm-bar-fill" style="width:78%"></div>
+          </div>
         </div>
+
+        <!-- Tres métricas clave -->
+        <div class="dash-metrics">
+          <div class="dash-metric">
+            <div class="dm-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C85C2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="dm-num" id="dm-stat1-val">3–4 hrs</div>
+            <div class="dm-label" id="dm-stat1-lbl">Duración visita</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dm-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C85C2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="dm-num" id="dm-stat2-val">Bs.360</div>
+            <div class="dm-label" id="dm-stat2-lbl">Precio fijo total</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dm-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C85C2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="dm-num" id="dm-stat3-val">Office</div>
+            <div class="dm-label" id="dm-stat3-lbl">A tu lugar</div>
+          </div>
+        </div>
+
+        <!-- Testimonial rotativo — 5 clientes, 1 por paquete -->
+        <div class="dash-testimony" id="dash-testimony-wrap">
+          <div class="dt-avatar" id="dt-avatar">CR</div>
+          <div class="dt-body">
+            <div class="dt-text" id="dt-text">"Arrancaba en 4 min. Ahora enciende en 22 segundos."</div>
+            <div class="dt-meta">
+              <span class="dt-name" id="dt-name">Carlos R. · Gerente Comercial</span>
+              <span class="dt-stars">★★★★★</span>
+            </div>
+          </div>
+          <!-- Indicadores de posición -->
+          <div class="dt-dots" id="dt-dots">
+            <span class="dt-dot dt-dot-active"></span>
+            <span class="dt-dot"></span>
+            <span class="dt-dot"></span>
+            <span class="dt-dot"></span>
+            <span class="dt-dot"></span>
+          </div>
+        </div>
+
       </div>
     </div>
+
   </div>
 </section>
 
@@ -1909,7 +2183,141 @@ document.addEventListener('DOMContentLoaded', chatRestart);
 </script>
 
 <script>
+/* ── TESTIMONIALES ROTATIVOS EN EL HERO ─────────────────────────────────
+   5 clientes reales, uno por cada paquete ofrecido.
+   Rotan cada 5 segundos. Actualizan también el panel de métricas superior.
+───────────────────────────────────────────────────────────────────────── */
+(function(){
+  var testimonios = [
+    {
+      // Paquete: Tune-Up Completo (Bs. 360)
+      initials : 'CR',
+      quote    : '"Arrancaba en 4 min. Ahora enciende en 22 segundos. Increíble."',
+      name     : 'Carlos R. · Gerente Comercial',
+      paquete  : 'Tune-Up Completo · Bs. 360',
+      pct      : 91,
+      sub      : 'Velocidad recuperada · Tune-Up Completo',
+      s1v      : '3–4 hrs', s1l: 'Duración visita',
+      s2v      : 'Bs.360',  s2l: 'Precio fijo total',
+      s3v      : '4 en 1',  s3l: 'Todo incluido'
+    },
+    {
+      // Paquete: Limpieza de Hardware (Bs. 120)
+      initials : 'LP',
+      quote    : '"Los ventiladores ya no suenan y el equipo dejó de sobrecalentarse."',
+      name     : 'Laura P. · Diseñadora Gráfica',
+      paquete  : 'Limpieza de Hardware · Bs. 120',
+      pct      : 87,
+      sub      : 'Reducción de temperatura · Hardware',
+      s1v      : '45 min', s1l: 'Tiempo de servicio',
+      s2v      : 'Bs.120', s2l: 'Precio fijo',
+      s3v      : '−18°C',  s3l: 'Temperatura CPU'
+    },
+    {
+      // Paquete: Optimización de Software (Bs. 100)
+      initials : 'DM',
+      quote    : '"El sistema ya no se congela a media mañana. Trabajo sin estrés."',
+      name     : 'Diego M. · Contador Independiente',
+      paquete  : 'Optimización de Software · Bs. 100',
+      pct      : 85,
+      sub      : 'Procesos liberados · Software',
+      s1v      : '1–2 hrs', s1l: 'Duración visita',
+      s2v      : 'Bs.100',  s2l: 'Precio fijo',
+      s3v      : '−70%',    s3l: 'Procesos al inicio'
+    },
+    {
+      // Paquete: Actualización de Drivers (Bs. 80)
+      initials : 'AV',
+      quote    : '"La impresora y la cámara volvieron a funcionar en 40 minutos."',
+      name     : 'Andrea V. · Asistente Administrativa',
+      paquete  : 'Actualización de Drivers · Bs. 80',
+      pct      : 88,
+      sub      : 'Dispositivos reconocidos · Drivers',
+      s1v      : '40 min', s1l: 'Tiempo promedio',
+      s2v      : 'Bs.80',  s2l: 'Precio fijo',
+      s3v      : '100%',   s3l: 'Dispositivos OK'
+    },
+    {
+      // Paquete: S.O.S Rendimiento (Bs. 150)
+      initials : 'RO',
+      quote    : '"El arranque bajó de 6 minutos a 35 segundos. No lo podía creer."',
+      name     : 'Roberto O. · Arquitecto · 3 PCs',
+      paquete  : 'S.O.S Rendimiento · Bs. 150',
+      pct      : 94,
+      sub      : 'Mejora de arranque · S.O.S',
+      s1v      : '2 hrs',  s1l: 'Tiempo de servicio',
+      s2v      : 'Bs.150', s2l: 'Precio fijo',
+      s3v      : '×8',     s3l: 'Más rápido al inicio'
+    }
+  ];
 
+  var idx = 0;
+
+  function applyTestimonio(t, animate){
+    /* --- Testimonial card --- */
+    var avatar  = document.getElementById('dt-avatar');
+    var text    = document.getElementById('dt-text');
+    var name    = document.getElementById('dt-name');
+    var wrap    = document.getElementById('dash-testimony-wrap');
+    var dots    = document.querySelectorAll('#dt-dots .dt-dot');
+
+    if(avatar) avatar.textContent = t.initials;
+    if(text)   text.textContent   = t.quote;
+    if(name)   name.textContent   = t.name;
+    if(animate && wrap){
+      wrap.classList.remove('dt-fade');
+      void wrap.offsetWidth;
+      wrap.classList.add('dt-fade');
+    }
+    dots.forEach(function(d,i){
+      d.classList.toggle('dt-dot-active', i === idx);
+    });
+
+    /* --- Panel principal --- */
+    var pctEl  = document.getElementById('dm-pct-val');
+    var subEl  = document.getElementById('dm-sub-text');
+    var barEl  = document.getElementById('dm-bar-fill');
+    var panel  = document.getElementById('dash-main-panel');
+    var lbl    = document.getElementById('dm-label-top');
+
+    if(pctEl) pctEl.textContent = '+' + t.pct;
+    if(subEl) subEl.textContent = t.sub;
+    if(lbl)   lbl.textContent   = 'Resultado real · ' + t.paquete;
+    if(barEl){
+      barEl.style.width = '0%';
+      setTimeout(function(){ barEl.style.width = t.pct + '%'; }, 50);
+    }
+    if(animate && panel){
+      panel.classList.remove('dm-fade');
+      void panel.offsetWidth;
+      panel.classList.add('dm-fade');
+    }
+
+    /* --- Métricas flotantes --- */
+    var s1v = document.getElementById('dm-stat1-val');
+    var s1l = document.getElementById('dm-stat1-lbl');
+    var s2v = document.getElementById('dm-stat2-val');
+    var s2l = document.getElementById('dm-stat2-lbl');
+    var s3v = document.getElementById('dm-stat3-val');
+    var s3l = document.getElementById('dm-stat3-lbl');
+
+    if(s1v) s1v.textContent = t.s1v;
+    if(s1l) s1l.textContent = t.s1l;
+    if(s2v) s2v.textContent = t.s2v;
+    if(s2l) s2l.textContent = t.s2l;
+    if(s3v) s3v.textContent = t.s3v;
+    if(s3l) s3l.textContent = t.s3l;
+  }
+
+  /* Inicializar sin animación en el primer render */
+  applyTestimonio(testimonios[0], false);
+
+  /* Rotar cada 5 segundos */
+  setInterval(function(){
+    idx = (idx + 1) % testimonios.length;
+    applyTestimonio(testimonios[idx], true);
+  }, 5000);
+})();
 </script>
 
 
