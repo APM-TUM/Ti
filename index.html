@@ -243,6 +243,7 @@ nav{
   border-radius:100px;padding:7px 18px;margin-bottom:36px;
   box-shadow:0 0 20px rgba(200,92,42,.08), inset 0 1px 0 rgba(255,255,255,.05);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  align-self:center;margin-left:auto;margin-right:auto;
 }
 .badge-dot{width:6px;height:6px;background:var(--orange);border-radius:50%;animation:blink 2s infinite;flex-shrink:0;box-shadow:0 0 6px rgba(200,92,42,.8)}
 .hero-badge span{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-light)}
@@ -390,7 +391,7 @@ nav{
 }
 /* WIDGET FLOTANTE CHAT */
 .float-chat-btn{
-  position:fixed;bottom:28px;right:28px;z-index:9000;
+  position:fixed;bottom:20px;right:20px;z-index:9000;
   width:54px;height:54px;border-radius:50%;
   background:var(--orange);border:none;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
@@ -411,7 +412,7 @@ nav{
   animation:blink 2s infinite;
 }
 .float-chat-panel{
-  position:fixed;bottom:96px;right:28px;z-index:8999;
+  position:fixed;bottom:88px;right:20px;z-index:8999;
   width:320px;
   background:rgba(16,14,12,.97);
   border:1px solid var(--orange-border);
@@ -430,7 +431,7 @@ nav{
   opacity:1;pointer-events:all;
 }
 @media(max-width:480px){
-  .float-chat-panel{width:calc(100vw - 32px);right:16px;bottom:88px}
+  .float-chat-panel{width:calc(100vw - 32px);right:16px;bottom:84px}
   .float-chat-btn{bottom:20px;right:16px}
 }
 .fch-header{
@@ -1705,7 +1706,7 @@ document.addEventListener('DOMContentLoaded', chatRestart);
 <style>
 /* ── FAB MENU ── */
 #atumti-fab{
-  position:fixed;bottom:24px;left:24px;z-index:9100;
+  position:fixed;bottom:20px;left:20px;z-index:9100;
   /* button is the reference point; panels float above it */
 }
 #atumti-fab-btn{
@@ -1801,7 +1802,7 @@ document.addEventListener('DOMContentLoaded', chatRestart);
 .fab-label{font-size:12px;font-weight:700;color:#fff;font-family:var(--font-heading)}
 .fab-sub{font-size:10px;color:rgba(255,255,255,.35);line-height:1.3;font-family:var(--font-body)}
 @media(max-width:480px){
-  #atumti-fab{bottom:16px;left:14px}
+  #atumti-fab{bottom:20px;left:14px}
   .fab-panel{width:220px}
 }
 </style>
