@@ -7,6 +7,10 @@
 <meta name="description" content="Mantenimiento técnico profesional para PC y portátiles en Santa Cruz, Bolivia. Vamos a tu oficina. Mismo día. Precio fijo sin sorpresas.">
 <meta name="theme-color" content="#1e1c1a">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<!-- build:20260330-001 -->
 <!-- Fuentes: preconnect para acelerar, display=swap para no bloquear render -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,12 +95,12 @@ img{max-width:100%;height:auto;loading:lazy}
 
 /* NAV */
 nav{
-  position:fixed;top:68px;left:50%;transform:translateX(-50%);z-index:8000;
+  position:fixed;top:68px;left:0;right:0;margin:0 auto;z-index:8000;
   background:rgba(15,15,15,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border:1px solid var(--orange-border);border-radius:100px;
   padding:10px 24px;display:flex;align-items:center;gap:28px;
   box-shadow:0 6px 32px rgba(0,0,0,.5);
-  white-space:nowrap;max-width:calc(100vw - 32px);
+  white-space:nowrap;width:fit-content;max-width:calc(100vw - 32px);
 }
 .nav-logo{font-family:var(--font-heading);font-size:20px;font-weight:800;color:var(--color-h1);letter-spacing:-.04em;text-decoration:none}
 .nav-logo em{color:var(--orange);font-style:normal}
@@ -112,7 +116,7 @@ nav{
 }
 .nav-cta:hover{transform:scale(1.05)}
 @media(max-width:768px){
-  nav{top:52px;left:50%;right:auto;transform:translateX(-50%);padding:9px 16px;gap:12px;border-radius:100px;width:fit-content;min-width:0;max-width:calc(100vw - 32px)}
+  nav{top:52px;left:0;right:0;margin:0 auto;transform:none;padding:9px 16px;gap:12px;border-radius:100px;width:fit-content;min-width:0;max-width:calc(100vw - 32px)}
   .nav-links{display:none}
   .nav-logo{font-size:15px;white-space:nowrap;flex-shrink:0}
   .nav-logo span{font-size:1.4em !important}
@@ -711,10 +715,10 @@ footer strong{color:var(--orange)}
 
 /* --- TABLET (481px – 768px) --- */
 @media(min-width:481px) and (max-width:768px){
-  nav{left:50%;right:auto;transform:translateX(-50%);width:fit-content;max-width:calc(100vw - 32px);border-radius:100px}
+  nav{left:0;right:0;margin:0 auto;transform:none;width:fit-content;max-width:calc(100vw - 32px);border-radius:100px}
   .hero-inner{padding:120px 24px 80px}
   .hero-ctas{justify-content:center}
-  #atumti-fab{bottom:92px}
+  #atumti-fab{bottom:20px}
   .float-chat-btn{bottom:20px}
 
   /* Grids 2col → 1col */
@@ -735,9 +739,11 @@ footer strong{color:var(--orange)}
 
   /* Nav: no desborda, pegado a los bordes */
   nav{
-    left:10px !important;
-    right:10px !important;
+    left:0 !important;
+    right:0 !important;
+    margin:0 auto !important;
     transform:none !important;
+    width:fit-content !important;
     max-width:calc(100vw - 20px) !important;
     border-radius:12px !important;
     padding:7px 12px !important;
