@@ -31,8 +31,6 @@
   --color-h2:#FAF7F4;
   --color-body:#CCCCCC;
   --color-label:#C85C2A;
-  --font-heading:'Plus Jakarta Sans','Trebuchet MS',system-ui,sans-serif;
-  --font-body:'Inter','Segoe UI',system-ui,sans-serif;
 }
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--font-body);background:var(--dark);color:var(--color-body);overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeSpeed}
@@ -160,7 +158,7 @@ nav{
 
 #hero{
   position:relative;display:flex;align-items:center;justify-content:center;
-  overflow:hidden;min-height:100svh;
+  overflow:hidden;min-height:100vh;min-height:100svh;
   isolation:isolate;
   background: radial-gradient(ellipse 140% 90% at 55% 35%,
     rgba(45,30,18,1) 0%,
@@ -406,7 +404,7 @@ nav{
   align-items:center;
   gap:0;
   padding:160px 64px 120px;
-  min-height:100svh;
+  min-height:100vh;min-height:100svh;
 }
 .hero-content{
   animation:fadeUp .9s .1s both;
@@ -817,13 +815,6 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 /* SERVICIOS */
 #servicios{background:var(--dark)}
 .services-note{font-size:14px;color:rgba(255,255,255,.38);max-width:520px;line-height:1.7;margin-bottom:48px}
-.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;border-radius:20px;overflow:hidden}
-@media(max-width:640px){.services-grid{grid-template-columns:1fr}}
-.service-card{background:rgba(255,255,255,.025);padding:36px 30px;position:relative;overflow:hidden;transition:background .3s}
-.service-card::after{content:'';position:absolute;inset:0;border:1px solid rgba(255,255,255,.05);pointer-events:none}
-.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange-light));opacity:0;transition:opacity .3s}
-.service-card:hover{background:rgba(255,255,255,.05)}
-.service-card:hover::before{opacity:1}
 .card-icon{font-size:2rem;margin-bottom:18px;display:block}
 .card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
 .card-title{font-family:var(--font-heading);font-size:1rem;font-weight:700;color:var(--color-h2);line-height:1.3;flex:1}
@@ -935,8 +926,38 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .chip-dot{width:5px;height:5px;background:var(--orange);border-radius:50%;opacity:.6}
 
 /* FOOTER */
-footer{padding:32px 40px 90px;text-align:center;font-size:12px;color:rgba(255,255,255,.18);border-top:1px solid rgba(255,255,255,.04)}
+footer{
+  padding:32px 40px 90px;
+  text-align:center;
+  font-size:12px;
+  color:rgba(255,255,255,.18);
+  border-top:1px solid rgba(255,255,255,.04);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 footer strong{color:var(--orange)}
+.footer-pill{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(15,15,15,.8);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--orange-border);
+  border-radius:100px;
+  padding:10px 24px;
+  box-shadow:0 6px 32px rgba(0,0,0,.5);
+  font-size:12px;color:rgba(255,255,255,.4);
+  white-space:nowrap;max-width:calc(100vw - 32px);flex-wrap:wrap;justify-content:center;gap:8px;
+}
+.footer-pill strong{
+  font-family:var(--font-heading);font-size:15px;font-weight:800;
+  color:var(--color-h1);letter-spacing:-.04em;
+}
+.footer-pill strong em{color:var(--orange);font-style:normal}
+.footer-sep{color:var(--orange);opacity:.4;margin:0 2px}
+@media(max-width:480px){
+  footer{padding:24px 16px 90px !important}
+  .footer-pill{font-size:11px !important;padding:9px 16px !important}
+}
 
 /* =============================================
    MOBILE OPTIMIZATIONS — COMPREHENSIVE FIX
@@ -944,7 +965,6 @@ footer strong{color:var(--orange)}
 
 /* --- TABLET (481px – 768px) --- */
 @media(min-width:481px) and (max-width:768px){
-  nav{left:0;right:0;margin:0 auto;transform:none;width:fit-content;max-width:calc(100vw - 32px);border-radius:100px}
   .hero-inner{padding:120px 24px 80px}
   .hero-ctas{justify-content:center}
   #atumti-fab{bottom:20px}
@@ -952,7 +972,6 @@ footer strong{color:var(--orange)}
 
   /* Grids 2col → 1col */
   .prob-grid,
-  .services-grid,
   .why-grid{grid-template-columns:1fr}
   #svc-selector{grid-template-columns:1fr}
   .svc-card-tuneup{grid-column:1}
@@ -1088,6 +1107,23 @@ footer strong{color:var(--orange)}
   .hero-h1{font-size:26px !important}
   section{padding:28px 12px !important}
   .svc-card-inner{padding:14px 12px 44px !important}
+}
+
+/* Desactivar will-change en móvil para ahorrar memoria GPU */
+@media(max-width:768px){
+  .hero-glow,.hero-glow::before,.hero-glow::after,
+  .hero-orb3,.dash-main,.dash-metric,.dash-testimony{
+    will-change:auto;
+  }
+}
+
+/* Respetar preferencia de movimiento reducido */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
 }
 
 </style>
@@ -1741,10 +1777,10 @@ function toggleSvcAcc(btn) {
     <div class="sec-label">Por qué elegir A TUM Ti</div>
     <h2 class="sec-h2" style="line-height:1.15">No somos los únicos.<br><strong style="color:var(--orange)">Pero sí los que van a ti.</strong></h2>
     <div class="why-grid">
-      <div class="why-card reveal"><div class="why-num">01</div><div class="why-title">Tu oficina, no un taller</div><p class="why-desc">No pierdes medio día trasladando equipos. No dependes de que te llamen cuando esté listo. Vamos a donde estás tú, trabajamos y dejamos todo funcionando antes de irnos.</p><span class="why-badge">→ Cero interrupciones en tu jornada</span></div>
-      <div class="why-card reveal"><div class="why-num">02</div><div class="why-title">Precio que ves antes de decir sí</div><p class="why-desc">No hay "depende" ni cobros extra al final. Antes de agendar, sabes exactamente cuánto pagarás. Nada de sorpresas. Nada de letra chica. Precio claro, servicio honesto.</p><span class="why-badge">→ Lo que te dijeron es lo que pagas</span></div>
-      <div class="why-card reveal"><div class="why-num">03</div><div class="why-title">Metodología S.O.S — no improvisamos</div><p class="why-desc">Cada servicio sigue un proceso probado. No llegamos a "ver qué tiene". Llegamos con un sistema: diagnosticamos, actuamos y entregamos un resultado concreto que puedes medir.</p><span class="why-badge">→ Resultado medible, no promesa vaga</span></div>
-      <div class="why-card reveal"><div class="why-num">04</div><div class="why-title">Lo sentís desde el primer arranque</div><p class="why-desc">No es un mantenimiento que "ayuda a largo plazo". La diferencia la notás ese mismo día: el equipo arranca más rápido, trabaja más frío, responde sin demoras. Mismo día.</p><span class="why-badge">→ Diferencia inmediata, no invisible</span></div>
+      <div class="why-card reveal"><div class="why-num">01</div><div class="why-title">Tu oficina, no un taller</div><p class="why-desc">No pierdes medio día trasladando equipos. Vamos donde estás tú, trabajamos y dejamos todo funcionando antes de irnos.</p><span class="why-badge">→ Cero interrupciones en tu jornada</span></div>
+      <div class="why-card reveal"><div class="why-num">02</div><div class="why-title">Precio que ves antes de decir sí</div><p class="why-desc">Antes de agendar, sabes exactamente cuánto pagarás. Sin letra chica, sin cobros extra. Lo que acordamos es lo que pagas.</p><span class="why-badge">→ Transparencia total desde el inicio</span></div>
+      <div class="why-card reveal"><div class="why-num">03</div><div class="why-title">Metodología S.O.S — no improvisamos</div><p class="why-desc">Cada visita sigue un proceso probado. No llegamos a "ver qué tiene" — llegamos con un sistema: diagnosticamos, actuamos y entregamos un resultado que podés medir.</p><span class="why-badge">→ Proceso claro, resultado concreto</span></div>
+      <div class="why-card reveal"><div class="why-num">04</div><div class="why-title">Lo sentís desde el primer arranque</div><p class="why-desc">La diferencia no es invisible ni a largo plazo. El equipo arranca más rápido, trabaja más frío y responde sin demoras — lo notás en las primeras horas.</p><span class="why-badge">→ Impacto inmediato, no una promesa</span></div>
     </div>
   </div>
 </section>
@@ -1754,7 +1790,7 @@ function toggleSvcAcc(btn) {
   <div class="cta-inner">
     <p class="cta-quote">"Nunca intentaré vender lo que nadie necesita.<br>Pero sí mostraré sin reservas lo que genuinamente <em>resuelve un problema real.</em>"</p>
     <h2 class="cta-title">Tu equipo.<span class="hoy">Hoy mismo.</span></h2>
-    <p class="cta-sub">Un mensaje y coordinamos todo.<br><strong>Sin formularios. Sin esperas. Sin complicaciones.</strong></p>
+    <p class="cta-sub">Un mensaje es todo lo que necesitas.<br><strong>Coordinamos, vamos y lo dejamos resuelto.</strong></p>
     <a href="https://wa.me/591XXXXXXXX?text=Hola%2C%20quiero%20agendar%20un%20mantenimiento%20SNOW" class="btn-primary" style="margin:0 auto;font-size:1rem;padding:16px 36px">Solicitar Ahora por WhatsApp <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     <div class="cta-steps">
       <div class="cta-step"><span class="cta-step-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="8.5" stroke="#C85C2A" stroke-width="1.2"/><text x="9" y="13" text-anchor="middle" font-family="'Plus Jakarta Sans','Trebuchet MS',system-ui,sans-serif" font-size="9" font-weight="800" fill="#C85C2A">1</text></svg></span><span class="cta-step-text">Escríbenos por WhatsApp</span></div>
@@ -1765,7 +1801,17 @@ function toggleSvcAcc(btn) {
   </div>
 </section>
 
-<footer><strong><span style="font-size:1.2em;vertical-align:middle;">A</span> TUM  Ti</strong> · Mantenimiento Técnico Profesional · Santa Cruz de la Sierra, Bolivia · 2026</footer>
+<footer>
+  <div class="footer-pill">
+    <strong><span style="font-size:1.4em;line-height:1;vertical-align:middle;letter-spacing:-.05em;">A</span><em>&nbsp;&nbsp;TUM&nbsp;&nbsp;Ti</em></strong>
+    <span class="footer-sep">·</span>
+    Mantenimiento Técnico Profesional
+    <span class="footer-sep">·</span>
+    Santa Cruz de la Sierra, Bolivia
+    <span class="footer-sep">·</span>
+    2026
+  </div>
+</footer>
 
 <script>
 // Scroll reveal
@@ -2132,19 +2178,19 @@ document.addEventListener('DOMContentLoaded', chatRestart);
       <div class="fab-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="#C85C2A" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       </div>
-      <div class="fab-text"><div class="fab-label">WhatsApp directo</div><div class="fab-sub">Agendar ahora</div></div>
+      <div class="fab-text"><div class="fab-label">WhatsApp directo</div><div class="fab-sub">Respondemos de inmediato</div></div>
     </a>
     <a href="#servicios" class="fab-item" onclick="closeFab()">
       <div class="fab-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C85C2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
       </div>
-      <div class="fab-text"><div class="fab-label">Ver precios</div><div class="fab-sub">Precio fijo sin sorpresas</div></div>
+      <div class="fab-text"><div class="fab-label">Ver precios</div><div class="fab-sub">Elige tu servicio</div></div>
     </a>
     <a href="#cta-final" class="fab-item" onclick="closeFab()">
       <div class="fab-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C85C2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </div>
-      <div class="fab-text"><div class="fab-label">Solicitar ahora</div><div class="fab-sub">Resultados el mismo día</div></div>
+      <div class="fab-text"><div class="fab-label">Solicitar ahora</div><div class="fab-sub">Lo gestionamos hoy</div></div>
     </a>
   </div>
 
