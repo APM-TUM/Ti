@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>A TUM Ti — Mantenimiento Técnico Profesional · Santa Cruz, Bolivia</title>
 <meta name="description" content="Mantenimiento técnico profesional para PC y portátiles en Santa Cruz, Bolivia. Vamos a tu oficina. Mismo día. Precio fijo sin sorpresas.">
 <meta name="theme-color" content="#1e1c1a">
@@ -156,7 +156,6 @@ nav{
 #hero{
   position:relative;display:flex;align-items:center;justify-content:center;
   overflow:hidden;min-height:100vh;min-height:100svh;
-  isolation:isolate;
   background: radial-gradient(ellipse 140% 90% at 55% 35%,
     rgba(45,30,18,1) 0%,
     rgba(22,17,12,1) 45%,
@@ -687,7 +686,7 @@ section{padding:56px 40px}
 .sec-h2 strong{color:var(--orange)}
 
 /* PROBLEMA */
-#problema{background:var(--dark2);position:relative;overflow:hidden;contain:layout style}
+#problema{background:var(--dark2);position:relative;overflow:hidden}
 #problema::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 45% at 15% 35%, rgba(200,92,42,.05) 0%, transparent 60%);pointer-events:none}
 .prob-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:36px;border-radius:20px;overflow:hidden}
 @media(max-width:640px){.prob-grid{grid-template-columns:1fr}}
@@ -755,7 +754,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 @media(max-width:420px){}
 
 /* PORQUE */
-#porque{background:var(--dark2);position:relative;overflow:hidden;contain:layout style}
+#porque{background:var(--dark2);position:relative;overflow:hidden}
 #porque::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 85% 30%, rgba(200,92,42,.05) 0%, transparent 65%);pointer-events:none}
 .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;border-radius:20px;overflow:hidden;margin-top:40px}
 @media(max-width:640px){.why-grid{grid-template-columns:1fr}}
