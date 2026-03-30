@@ -1262,7 +1262,14 @@ footer strong{color:var(--orange)}
             </div>
             <div class="svc-inline-result" id="res-tuneup"></div>
           </div>
-          <div class="svc-price-badge svc-price-tuneup"><span class="svc-price-old">Bs. 420</span> Bs. 360</div>
+          <div class="svc-price-bar">
+            <div class="svc-price-bar-left">
+              <span class="svc-price-bar-old">Bs. 420</span>
+              <span class="svc-price-bar-save">Ahorrás Bs. 60</span>
+            </div>
+            <div class="svc-price-bar-main">Bs. 360</div>
+            <div class="svc-price-bar-right">precio fijo · sin sorpresas</div>
+          </div>
         </div>
 
         <!-- HARDWARE -->
@@ -1546,6 +1553,44 @@ footer strong{color:var(--orange)}
   font-size:15px;
 }
 .svc-price-old{text-decoration:line-through;opacity:.55;margin-right:6px;font-size:11px;color:rgba(255,255,255,.7)}
+
+/* Barra de precio profesional — solo Tune-Up */
+.svc-price-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(90deg, rgba(200,92,42,.12) 0%, rgba(200,92,42,.06) 100%);
+  border-top:1px solid rgba(200,92,42,.3);
+  border-radius:0 0 22px 22px;
+  padding:14px 24px;
+  gap:12px;
+}
+.svc-price-bar-left{
+  display:flex;flex-direction:column;gap:2px;
+}
+.svc-price-bar-old{
+  font-size:11px;font-weight:600;
+  color:rgba(255,255,255,.35);
+  text-decoration:line-through;
+  font-family:var(--font-heading);
+}
+.svc-price-bar-save{
+  font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:#4ade80;
+}
+.svc-price-bar-main{
+  font-family:var(--font-heading);font-size:28px;font-weight:800;
+  color:#FAF7F4;letter-spacing:-.03em;line-height:1;
+  text-shadow:0 0 20px rgba(200,92,42,.4);
+}
+.svc-price-bar-right{
+  font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);text-align:right;line-height:1.5;
+  max-width:80px;
+}
+@media(max-width:480px){
+  .svc-price-bar{padding:12px 16px}
+  .svc-price-bar-main{font-size:24px}
+  .svc-price-bar-right{display:none}
+}
 
 /* ── INLINE RESULT INSIDE CARD ── */
 .svc-inline-result{
