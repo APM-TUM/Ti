@@ -1339,7 +1339,7 @@ footer strong{color:var(--orange)}
         <!-- TUNE-UP (primero) -->
         <div class="svc-card svc-card-tuneup svc-card-popular" id="sc-tuneup" onclick="svcSelect('tuneup')">
           <div class="svc-popular-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Recomendado · Más vendido</div>
-          <div class="svc-card-inner">
+          <div class="svc-card-inner" style="padding-top:16px">
             <div class="svc-card-header">
               <div class="svc-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
               <div class="svc-titles">
@@ -1540,8 +1540,6 @@ footer strong{color:var(--orange)}
 }
 .svc-card-tuneup{grid-column:1/-1}
 @media(max-width:640px){.svc-card-tuneup{grid-column:1}}
-.svc-card-tuneup{grid-column:1/-1}
-@media(max-width:640px){.svc-card-tuneup{grid-column:1}}
 .svc-card:hover{border-color:var(--orange-border);background:rgba(200,92,42,.06);transform:translateY(-4px)}
 .svc-card.svc-selected{
   border-color:var(--orange);
@@ -1555,13 +1553,19 @@ footer strong{color:var(--orange)}
   box-shadow:0 0 0 2px var(--orange), 0 12px 48px rgba(200,92,42,.3);
 }
 .svc-popular-badge{
-  position:absolute;top:0;right:0;
+  display:flex;align-items:center;gap:6px;
   background:var(--orange);color:#fff;
   font-size:11px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;
-  padding:8px 20px 8px 18px;border-radius:0 22px 0 14px;
-  border-left:2px solid rgba(255,255,255,.35);
-  border-bottom:2px solid rgba(255,255,255,.35);
-  display:flex;align-items:center;gap:6px;
+  padding:7px 18px;
+  border-radius:22px 22px 0 0;
+  white-space:nowrap;
+  width:fit-content;
+  margin-left:auto;
+}
+.svc-card-tuneup .svc-card-inner{padding-top:16px}
+@media(max-width:640px){
+  .svc-popular-badge{font-size:10px;padding:6px 14px}
+  .svc-card-tuneup .svc-card-inner{padding-top:16px}
 }
 .svc-card-inner{padding:28px 24px 22px}
 .svc-card-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
