@@ -525,11 +525,13 @@ nav{
 
 /* RESPONSIVE HERO */
 @media(max-width:900px){
+  #hero{min-height:auto}
   .hero-inner{
     grid-template-columns:1fr;
-    padding:148px 32px 80px;
+    padding:130px 32px 56px;
     gap:0;
     align-items:flex-start;
+    min-height:auto;
   }
   .hero-content{
     align-items:center;
@@ -547,10 +549,15 @@ nav{
   .hero-trust{max-width:100%}
 }
 @media(max-width:600px){
-  .hero-inner{padding:128px 20px 72px;}
+  #hero{min-height:auto}
+  .hero-inner{padding:106px 20px 48px;min-height:auto}
   .hero-h1{font-size:clamp(38px,11vw,56px);}
+  .hero-sub{margin-bottom:28px}
   .hero-ctas{flex-direction:column;align-items:stretch;gap:10px}
   .btn-primary,.btn-secondary{justify-content:center}
+}
+@media(max-width:480px){
+  .hero-inner{padding:96px 18px 40px}
 }
 .btn-primary{
   display:inline-flex;align-items:center;gap:8px;
