@@ -1603,6 +1603,51 @@ footer strong{color:var(--orange)}
           <div class="svc-price-badge">Bs. 120</div>
         </div>
 
+        <!-- REINSTALACIÓN SO -->
+        <div class="svc-card" id="sc-reinstalacion" onclick="svcSelect('reinstalacion')">
+          <div class="svc-card-inner">
+            <div class="svc-card-header">
+              <div class="svc-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M9 9l2 2 4-4"/></svg></div>
+              <div class="svc-titles">
+                <div class="svc-sub">Sistema operativo · S.O</div>
+                <div class="svc-name">Reinstalación <span>de Windows</span></div>
+              </div>
+              <div class="svc-check" id="chk-reinstalacion"></div>
+            </div>
+            <div class="svc-tagline-block">
+              <div class="svc-tagline-bg">S.O</div>
+              <div class="svc-tagline-headline">Instalación limpia de Windows. Sin archivos basura, sin configuraciones rotas. Tu sistema desde cero.</div>
+            </div>
+            <div class="svc-divider"></div>
+            <div class="svc-acc-wrap" onclick="event.stopPropagation()">
+              <button class="svc-acc-btn" onclick="toggleSvcAcc(this)" aria-expanded="false">
+                <span>Ver qué incluye</span>
+                <svg class="svc-acc-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="svc-acc-body">
+                <ul class="svc-features">
+                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Formateo e instalación limpia de Windows</li>
+                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Garantía escrita de 7 días — si falla por el servicio, lo reinstalamos sin costo</li>
+                  <li><span class="svc-check-icon no"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,80,80,.7)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span><span style="color:rgba(204,204,204,.45)">No incluye respaldo de datos — el cliente es responsable de su información antes del servicio</span></li>
+                  <li><span class="svc-check-icon no"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,80,80,.7)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span><span style="color:rgba(204,204,204,.45)">No incluye optimización ni mantenimiento — ver Tune-Up Completo para eso</span></li>
+                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>PC o Portátil</li>
+                </ul>
+                <!-- Garantía box -->
+                <div style="margin-top:14px;background:rgba(200,92,42,.07);border:1px solid rgba(200,92,42,.22);border-radius:12px;padding:12px 14px;">
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                    <span style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);">Garantía escrita incluida</span>
+                  </div>
+                  <p style="font-size:11px;color:rgba(204,204,204,.65);line-height:1.6;margin:0;">Cubre reinstalación sin costo si el problema es atribuible al servicio realizado. <strong style="color:rgba(250,247,244,.7);">Válida 7 días desde la fecha de entrega.</strong></p>
+                  <p style="font-size:10px;color:rgba(204,204,204,.35);line-height:1.5;margin-top:6px;">Límite de garantía: el valor máximo cubierto equivale al monto cobrado por el servicio (Bs. 150). No cubre hardware, virus posteriores ni modificaciones del cliente.</p>
+                </div>
+              </div>
+            </div>
+            <div class="svc-inline-result" id="res-reinstalacion"></div>
+          </div>
+          <div class="svc-price-badge">Bs. 150</div>
+        </div>
+
         <!-- SOS -->
         <div class="svc-card" id="sc-sos" onclick="svcSelect('sos')">
           <div class="svc-card-inner">
@@ -1690,7 +1735,7 @@ footer strong{color:var(--orange)}
   .svc-popular-badge{font-size:10px;padding:6px 14px}
   .svc-card-tuneup .svc-card-inner{padding-top:18px}
 }
-.svc-card-inner{padding:28px 24px 22px}
+.svc-card-inner{padding:28px 24px 48px}
 .svc-card-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .svc-icon-box{
   width:48px;height:48px;
@@ -1867,6 +1912,13 @@ const svcData = {
     precio: 'Bs. 360',
     desc: 'Los 4 servicios en una sola visita de 3–4 horas. <strong>Ahorrás Bs. 60 vs contratar por separado.</strong> Un solo día, resultado completo.',
     wa: 'Hola, quiero agendar el Tune-Up Completo (Bs. 360 — los 4 servicios) con A TUM Ti — ¿cuándo podemos coordinar?'
+  },
+  reinstalacion: {
+    label: 'Reinstalación de Sistema Operativo',
+    sub: 'Sistema operativo · Windows',
+    precio: 'Bs. 150',
+    desc: 'Instalación limpia de Windows sin archivos basura ni configuraciones rotas. <strong>Tu sistema desde cero, con garantía escrita de 7 días.</strong>',
+    wa: 'Hola, quiero agendar una Reinstalación de Sistema Operativo (Bs. 150) con A TUM Ti — ¿cuándo podemos coordinar?'
   }
 };
 
