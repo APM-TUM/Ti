@@ -1604,6 +1604,43 @@ footer strong{color:var(--orange)}
         </div>
 
         <!-- REINSTALACIÓN SO -->
+        <!-- SOS -->
+        <div class="svc-card" id="sc-sos" onclick="svcSelect('sos')">
+          <div class="svc-card-inner">
+            <div class="svc-card-header">
+              <div class="svc-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="20" cy="4" r="2" fill="var(--orange)" stroke="none"/><path d="M20 2v4M18 4h4" stroke="var(--orange)" stroke-width="1.5"/></svg></div>
+              <div class="svc-titles">
+                <div class="svc-sub">Optimización avanzada</div>
+                <div class="svc-name">S.O.S —<span>A TUM Ti</span></div>
+              </div>
+              <div class="svc-check" id="chk-sos"></div>
+            </div>
+            <div class="svc-tagline-block">
+              <div class="svc-tagline-bg">SOS</div>
+              <div class="svc-tagline-headline">El nivel de rendimiento que nunca tuviste. Metodología propia. Resultado máximo.</div>
+            </div>
+            <div class="svc-divider"></div>
+            <div class="svc-acc-wrap" onclick="event.stopPropagation()">
+              <button class="svc-acc-btn" onclick="toggleSvcAcc(this)" aria-expanded="false">
+                <span>Ver qué incluye</span>
+                <svg class="svc-acc-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="svc-acc-body">
+                <ul class="svc-features">
+                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Diagnóstico completo de rendimiento</li>
+                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Ajuste fino de recursos del sistema</li>
+                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Optimización del consumo de energía</li>
+                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Gestión avanzada del inicio del sistema</li>
+                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Metodología S.O.S exclusiva de A TUM Ti</li>
+                </ul>
+              </div>
+            </div>
+            <div class="svc-inline-result" id="res-sos"></div>
+          </div>
+          <div class="svc-price-badge">Bs. 150</div>
+        </div>
+
+        <!-- Reinstalación de Windows -->
         <div class="svc-card" id="sc-reinstalacion" onclick="svcSelect('reinstalacion')">
           <div class="svc-card-inner">
             <div class="svc-card-header">
@@ -1644,42 +1681,6 @@ footer strong{color:var(--orange)}
               </div>
             </div>
             <div class="svc-inline-result" id="res-reinstalacion"></div>
-          </div>
-          <div class="svc-price-badge">Bs. 150</div>
-        </div>
-
-        <!-- SOS -->
-        <div class="svc-card" id="sc-sos" onclick="svcSelect('sos')">
-          <div class="svc-card-inner">
-            <div class="svc-card-header">
-              <div class="svc-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="20" cy="4" r="2" fill="var(--orange)" stroke="none"/><path d="M20 2v4M18 4h4" stroke="var(--orange)" stroke-width="1.5"/></svg></div>
-              <div class="svc-titles">
-                <div class="svc-sub">Optimización avanzada</div>
-                <div class="svc-name">S.O.S —<span>A TUM Ti</span></div>
-              </div>
-              <div class="svc-check" id="chk-sos"></div>
-            </div>
-            <div class="svc-tagline-block">
-              <div class="svc-tagline-bg">SOS</div>
-              <div class="svc-tagline-headline">El nivel de rendimiento que nunca tuviste. Metodología propia. Resultado máximo.</div>
-            </div>
-            <div class="svc-divider"></div>
-            <div class="svc-acc-wrap" onclick="event.stopPropagation()">
-              <button class="svc-acc-btn" onclick="toggleSvcAcc(this)" aria-expanded="false">
-                <span>Ver qué incluye</span>
-                <svg class="svc-acc-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div class="svc-acc-body">
-                <ul class="svc-features">
-                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Diagnóstico completo de rendimiento</li>
-                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Ajuste fino de recursos del sistema</li>
-                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Optimización del consumo de energía</li>
-                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Gestión avanzada del inicio del sistema</li>
-                  <li><span class="svc-check-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Metodología S.O.S exclusiva de A TUM Ti</li>
-                </ul>
-              </div>
-            </div>
-            <div class="svc-inline-result" id="res-sos"></div>
           </div>
           <div class="svc-price-badge">Bs. 150</div>
         </div>
